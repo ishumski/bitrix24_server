@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Installation</title></head>
+
+<body>
+<script src="https://api.bitrix24.com/api/v1/"></script>
+<script>
+    console.log('INSTALL_HTML')
+    console.log('WINDOW', window)
+    BX24.init(function () {
+        console.log('BX24', BX24)
+        BX24.installFinish();
+    });
+</script>
+</body>
+</html>

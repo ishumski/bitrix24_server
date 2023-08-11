@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Bitrix24 app tutorial</title>
-  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://api.bitrix24.com/api/v1/"></script>
+    <title>Bitrix24 app tutorial</title></head>
   <body>
-    <div id="root"></div>
+  <div id="root"></div>
+  <script>
+     BX24.init(function(){
+       const auth = BX24.getAuth()
+       BX24.installFinish()
+       console.log('BX24_INDEX_HTML', BX24)
+       console.log('auth', auth)
+
+       const urlParams = new URLSearchParams(window.location.search);
+       const baseUrl = `https://${urlParams.get("DOMAIN")}`;
+
+       const list = BX24.callMethod('placement.list')
+       console.log("LIST", list)
+
+       const listGet = BX24.callMethod('placement.get')
+       console.log("GET_LIST", listGet)
+
+       const URL = `${baseUrl}/rest/placement.bind?auth=${auth.access_token}`
+       console.log('URL', URL)
+
+       // BX24.callMethod(
+       //         'placement.bind',
+       //         {
+       //             PLACEMENT: 'LEFT_MENU',
+       //             HANDLER: URL,
+       //             TITLE: 'LEFT_MENU_TAB'
+       //         },
+       //         function(result){
+       //           console.log('RESULT', result)
+       //         })
+       // console.log('PLACEMENT_LEFT_WE_ARE_HERE')
+
+       BX24.callMethod(
+               'placement.bind',
+               {
+                   PLACEMENT: 'CRM_DEAL_DETAIL_TAB',
+                   HANDLER: URL,
+                   TITLE: 'CRM_DEAL_DETAIL_TAB'
+               })
+       console.log('CRM_LEAD_DETAIL_TAB_WE_ARE_HERE')
+     });
+  </script>
     <script src="../src/index.js">
     </script>
   </body>
